@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>입시전략연구소 | 당신의 합격을 설계합니다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --gold: #c8a96e;
+    --gold-light: #e8d5aa;
+    --cream: #faf7f2;
+    --warm-grey: #8a8480;
+    --deep: #1a1612;
+    --accent: #8b3a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--ink); letter-spacing: 0.04em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.06em;
+    color: var(--warm-grey); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream) !important;
+    padding: 8px 22px; border-radius: 2px;
+    font-weight: 500 !important; color: var(--cream) !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content: ''; width: 32px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 900; line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .hero-title em {
+    font-style: normal; color: var(--accent);
+    position: relative; display: inline-block;
+  }
+  .hero-title em::after {
+    content: ''; position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    animation: underline 0.8s 1s ease forwards;
+  }
+  @keyframes underline { to { transform: scaleX(1); } }
+  .hero-desc {
+    font-size: 1rem; line-height: 1.85; color: #555;
+    max-width: 440px; margin-bottom: 44px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    padding: 16px 36px; border: none; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold); transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+  .btn-primary:hover span { color: var(--ink); }
+  .btn-secondary {
+    background: transparent; color: var(--ink);
+    padding: 16px 24px; border: none; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem; font-weight: 400;
+    display: flex; align-items: center; gap: 8px;
+    transition: gap 0.2s;
+  }
+  .btn-secondary:hover { gap: 14px; }
+  .btn-secondary::after { content: '→'; }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2rem; font-weight: 700; color: var(--ink);
+    display: block; line-height: 1;
+  }
+  .stat-num span { color: var(--gold); font-size: 1.2rem; }
+  .stat-label {
+    font-size: 0.75rem; color: var(--warm-grey);
+    letter-spacing: 0.04em; margin-top: 4px; display: block;
+  }
+
+  .hero-right {
+    position: relative; background: var(--deep);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(200,169,110,0.12), transparent 60%);
+  }
+  .hero-decoration {
+    position: absolute; font-family: 'Noto Serif KR', serif;
+    font-size: 18rem; font-weight: 900; color: rgba(255,255,255,0.02);
+    line-height: 1; user-select: none; pointer-events: none;
+    letter-spacing: -0.05em; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-card {
+    position: relative; z-index: 2;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 48px 40px; width: 340px;
+    backdrop-filter: blur(4px);
+  }
+  .card-badge {
+    display: inline-block; padding: 4px 12px;
+    background: var(--gold); color: var(--deep);
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .card-school {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.5rem; font-weight: 700; color: #fff;
+    margin-bottom: 6px;
+  }
+  .card-dept { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+  .card-divider { height: 1px; background: rgba(200,169,110,0.2); margin-bottom: 24px; }
+  .card-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem; margin-bottom: 10px;
+  }
+  .card-row-label { color: rgba(255,255,255,0.4); }
+  .card-row-value { color: var(--gold-light); font-weight: 500; }
+  .card-success {
+    margin-top: 28px; padding: 14px;
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.2);
+    text-align: center;
+  }
+  .card-success-text {
+    font-size: 0.82rem; color: var(--gold);
+    font-weight: 500; letter-spacing: 0.04em;
+  }
+  .floating-dots {
+    position: absolute; inset: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .dot {
+    position: absolute; border-radius: 50%;
+    background: var(--gold); opacity: 0.15;
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 100px 80px; }
+  .section-tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800; line-height: 1.25;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 0.95rem; line-height: 1.8; color: #666; font-weight: 300;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--ink); }
+  .services .section-title { color: #fff; }
+  .services .section-desc { color: rgba(255,255,255,0.4); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; margin-top: 60px;
+    background: rgba(255,255,255,0.06);
+  }
+  .service-card {
+    background: var(--ink); padding: 40px 32px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s; cursor: default;
+  }
+  .service-card:hover { background: #1f1b17; }
+  .service-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 3rem; font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1; margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-num { color: rgba(200,169,110,0.12); }
+  .service-icon { font-size: 1.6rem; margin-bottom: 16px; }
+  .service-name {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: #fff; margin-bottom: 12px;
+  }
+  .service-desc { font-size: 0.82rem; line-height: 1.75; color: rgba(255,255,255,0.4); }
+
+  /* ── PROCESS ── */
+  .process { background: var(--cream); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; margin-top: 64px;
+    position: relative;
+  }
+  .process-steps::before {
+    content: ''; position: absolute;
+    top: 28px; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .process-step { padding: 0 20px; text-align: center; }
+  .step-circle {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 1px solid var(--gold); background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1rem; font-weight: 700; color: var(--gold);
+    position: relative; z-index: 1;
+    transition: all 0.3s;
+  }
+  .process-step:hover .step-circle {
+    background: var(--gold); color: var(--cream);
+    transform: scale(1.1);
+  }
+  .step-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.95rem; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .step-desc { font-size: 0.78rem; line-height: 1.7; color: #888; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: #f4efe8; padding: 100px 80px; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 60px;
+  }
+  .testimonial-card {
+    background: #fff; padding: 36px 32px;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .testimonial-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+  .testimonial-quote {
+    font-size: 2.5rem; color: var(--gold-light);
+    font-family: Georgia, serif; line-height: 1;
+    margin-bottom: 12px;
+  }
+  .testimonial-text {
+    font-size: 0.88rem; line-height: 1.85; color: #444;
+    margin-bottom: 28px; font-weight: 300;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.9rem; font-weight: 700; color: var(--deep);
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-size: 0.85rem; font-weight: 700; margin-bottom: 2px;
+  }
+  .author-school { font-size: 0.75rem; color: var(--warm-grey); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--deep);
+    text-align: center; padding: 100px 80px;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section .section-tag { justify-content: center; }
+  .cta-section .section-tag::before { display: none; }
+  .cta-section .section-title { color: #fff; margin: 0 auto 20px; max-width: 600px; }
+  .cta-section .section-desc { color: rgba(255,255,255,0.4); max-width: 480px; margin: 0 auto 44px; }
+  .cta-form {
+    display: flex; gap: 0; max-width: 480px;
+    margin: 0 auto; position: relative; z-index: 1;
+  }
+  .cta-input {
+    flex: 1; padding: 16px 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-right: none;
+    color: #fff; font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-input::placeholder { color: rgba(255,255,255,0.25); }
+  .cta-input:focus { border-color: var(--gold); }
+  .cta-btn {
+    background: var(--gold); color: var(--deep);
+    padding: 16px 28px; border: none; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem; font-weight: 700;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--gold-light); }
+  .cta-note {
+    margin-top: 16px; font-size: 0.75rem;
+    color: rgba(255,255,255,0.25); position: relative; z-index: 1;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0807; padding: 48px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(200,169,110,0.1);
+  }
+  .footer-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.6);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 0.75rem; color: rgba(255,255,255,0.3);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 16px 32px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 80px 40px; }
+    section { padding: 70px 40px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .process-steps::before { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero-left { padding: 60px 24px; }
+    section { padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .cta-form { flex-direction: column; }
+    .cta-input { border-right: 1px solid rgba(200,169,110,0.3); border-bottom: none; }
+    footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">입시전략<span>연구소</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">서비스</a></li>
+    <li><a href="#process">상담과정</a></li>
+    <li><a href="#results">합격후기</a></li>
+    <li><a href="#contact" class="nav-cta">무료 상담 신청</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Premier Admissions Consulting</div>
+    <h1 class="hero-title">
+      당신의 합격을<br>
+      <em>전략적으로</em><br>
+      설계합니다
+    </h1>
+    <p class="hero-desc">
+      수시·정시 전략부터 자기소개서, 면접까지<br>
+      개인 맞춤 솔루션으로 목표 대학 합격을 실현합니다.<br>
+      15년 이상의 경험이 만드는 차별화된 결과.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <span>무료 상담 신청하기</span>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        서비스 알아보기
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">98<span>%</span></span>
+        <span class="stat-label">목표대학 합격률</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">1,200<span>+</span></span>
+        <span class="stat-label">누적 합격생</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">15<span>년</span></span>
+        <span class="stat-label">입시 전문 경력</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="floating-dots">
+      <div class="dot" style="width:6px;height:6px;top:20%;left:20%;animation-delay:0s"></div>
+      <div class="dot" style="width:4px;height:4px;top:60%;left:70%;animation-delay:2s"></div>
+      <div class="dot" style="width:8px;height:8px;top:75%;left:30%;animation-delay:4s"></div>
+      <div class="dot" style="width:3px;height:3px;top:35%;left:80%;animation-delay:1s"></div>
+    </div>
+    <div class="hero-decoration">합</div>
+    <div class="hero-card">
+      <div class="card-badge">합격 사례</div>
+      <div class="card-school">서울대학교</div>
+      <div class="card-dept">경영대학 경영학과 · 2025학년도</div>
+      <div class="card-divider"></div>
+      <div class="card-row">
+        <span class="card-row-label">전형</span>
+        <span class="card-row-value">지역균형 수시</span>
+      </div>
+      <div class="card-row">
+        <span class="card-row-label">내신 등급</span>
+        <span class="card-row-value">1.8등급</span>
+      </div>
+      <div class="card-row">
+        <span class="card-row-label">컨설팅 기간</span>
+        <span class="card-row-value">6개월</span>
+      </div>
+      <div class="card-row">
+        <span class="card-row-label">자소서 첨삭</span>
+        <span class="card-row-value">8회 수정</span>
+      </div>
+      <div class="card-success">
+        <div class="card-success-text">🎓 최종 합격</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-tag">Services</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:0">
+    <h2 class="section-title" style="margin-bottom:0">전문가가 함께하는<br>맞춤 입시 서비스</h2>
+    <p class="section-desc">내신, 수능, 비교과까지 모든 입시 요소를 종합 분석하여<br>최적의 대입 전략을 수립합니다.</p>
+  </div>
+  <div class="services-grid fade-in">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">🎯</div>
+      <div class="service-name">대입 종합 컨설팅</div>
+      <div class="service-desc">학생 개인의 성적, 관심사, 목표를 종합 분석하여 최적의 대입 전략과 지원 대학 포트폴리오를 설계합니다.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">📊</div>
+      <div class="service-name">수시/정시 전략 수립</div>
+      <div class="service-desc">각 대학별 전형 특성을 깊이 분석하고, 합격 가능성을 극대화하는 수시·정시 지원 전략을 수립합니다.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">✍️</div>
+      <div class="service-name">자기소개서 클리닉</div>
+      <div class="service-desc">학생만의 강점과 스토리를 발굴하여 입학사정관의 눈에 띄는 차별화된 자기소개서를 완성합니다.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">💬</div>
+      <div class="service-name">면접 코칭</div>
+      <div class="service-desc">대학별·전형별 면접 유형을 분석하고, 1:1 모의면접을 통해 실전 대응 능력을 키웁니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div style="text-align:center; margin-bottom:0">
+    <div class="section-tag" style="justify-content:center"><span style="width:24px;height:1px;background:var(--gold);display:block"></span>Process</div>
+    <h2 class="section-title">합격까지의 5단계</h2>
+    <p class="section-desc">체계적인 프로세스로 흔들림 없는 입시를 준비합니다</p>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="process-step">
+      <div class="step-circle">01</div>
+      <div class="step-title">무료 초기 상담</div>
+      <div class="step-desc">현황 파악 및 목표 설정, 컨설팅 방향 논의</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">02</div>
+      <div class="step-title">정밀 진단 분석</div>
+      <div class="step-desc">내신·수능·비교과 종합 분석 및 가능성 진단</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">03</div>
+      <div class="step-title">전략 설계</div>
+      <div class="step-desc">맞춤 지원 전략 및 일정 로드맵 수립</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">04</div>
+      <div class="step-title">서류·면접 준비</div>
+      <div class="step-desc">자소서 작성 지도 및 면접 집중 훈련</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">05</div>
+      <div class="step-title">최종 결과 관리</div>
+      <div class="step-desc">지원 마감까지 밀착 관리 및 정시 대비</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="results">
+  <div class="section-tag">Success Stories</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0">
+    <h2 class="section-title">합격생의 이야기</h2>
+    <p class="section-desc" style="max-width:340px;text-align:right">실제 학생들이 경험한<br>변화와 성과입니다.</p>
+  </div>
+  <div class="testimonials-grid fade-in">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-text">처음엔 막막했는데, 선생님이 제 강점을 정확히 짚어주셨어요. 자소서를 완전히 새롭게 쓰면서 스스로도 몰랐던 저를 발견했고, 결국 원하던 학과에 합격했습니다.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">김</div>
+        <div>
+          <div class="author-name">김○○ 학생</div>
+          <div class="author-school">연세대학교 경영학과 합격 · 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-text">수시 6장을 어디에 써야 할지 전혀 몰랐는데, 꼼꼼한 분석으로 최적의 전략을 짜주셨어요. 덕분에 1지망 대학에 합격이라는 결과를 얻었습니다.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">이</div>
+        <div>
+          <div class="author-name">이○○ 학생</div>
+          <div class="author-school">고려대학교 법학과 합격 · 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-text">면접 준비가 가장 걱정이었는데, 모의면접을 반복하면서 자신감이 생겼어요. 실제 면접에서도 긴장하지 않고 제 이야기를 잘 전달할 수 있었습니다.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">박</div>
+        <div>
+          <div class="author-name">박○○ 학생</div>
+          <div class="author-school">서울대학교 의예과 합격 · 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-tag">Start Now</div>
+  <h2 class="section-title">지금 무료 상담으로<br>시작하세요</h2>
+  <p class="section-desc">연락처를 남겨주시면 24시간 내 전문 컨설턴트가 직접 연락드립니다.</p>
+  <div class="cta-form">
+    <input class="cta-input" type="tel" placeholder="연락처를 입력해 주세요 (010-0000-0000)">
+    <button class="cta-btn">무료 상담 신청</button>
+  </div>
+  <p class="cta-note">카카오톡 채널 @입시전략연구소 로도 문의 가능합니다</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">입시전략<span>연구소</span></div>
+  <div class="footer-copy">© 2025 입시전략연구소. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#">개인정보처리방침</a>
+    <a href="#">이용약관</a>
+    <a href="#">오시는 길</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // CTA button
+  document.querySelector('.cta-btn').addEventListener('click', () => {
+    const input = document.querySelector('.cta-input');
+    if (input.value.trim()) {
+      input.value = '';
+      input.placeholder = '✓ 접수 완료! 곧 연락드리겠습니다.';
+      input.style.color = '#c8a96e';
+    } else {
+      input.style.borderColor = '#8b3a2a';
+      input.placeholder = '연락처를 입력해 주세요';
+      setTimeout(() => input.style.borderColor = '', 1500);
+    }
+  });
+
+  // Number counter animation
+  function animateCounter(el, target, suffix = '') {
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current) + suffix;
+    }, 16);
+  }
+</script>
+</body>
+</html>
